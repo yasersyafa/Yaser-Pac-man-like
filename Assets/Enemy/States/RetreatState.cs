@@ -9,17 +9,20 @@ namespace Assets.Enemy.States
     {
         public void EnterState(Enemy owner)
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public void ExitState(Enemy owner)
         {
-            throw new System.NotImplementedException();
+            if(owner.TargetEnemy() != null)
+            {
+                owner.NavMeshAgent.SetDestination(owner.transform.position - owner.TargetEnemy().position);
+            }
         }
 
         public void UpdateState(Enemy owner)
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }

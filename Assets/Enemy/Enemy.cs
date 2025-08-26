@@ -38,6 +38,26 @@ namespace Assets.Enemy
             NavMeshAgent = GetComponent<NavMeshAgent>();
         }
 
+        private void Start()
+        {
+            PlayerController player = _targetEnemy.GetComponent<PlayerController>();
+            if (player != null)
+            {
+                player.OnPowerUpStart += StartRetreating;
+                player.OnPowerUpStop += StopRetreating;
+            }
+        }
+
+        private void StartRetreating()
+        {
+            SwitchState(RetreatState);
+        }
+
+        private void StopRetreating()
+        {
+            SwitchState(PatrolState);
+        }
+
         public void SwitchState(BaseState<Enemy> newState)
         {
             _currentState?.ExitState(this);

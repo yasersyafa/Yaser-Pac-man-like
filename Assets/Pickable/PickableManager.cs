@@ -4,6 +4,8 @@ using UnityEngine;
 public class PickableManager : MonoBehaviour
 {
     private List<Pickable> _pickables = new();
+    [SerializeField]
+    private PlayerController _playerController;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,9 +33,12 @@ public class PickableManager : MonoBehaviour
 
     private void OnPickablePicked(Pickable pickable)
     {
+        if (pickable.Type == PickableType.PowerUp)
+        {
+            _playerController?.PickPowerUp();
+        }
         _pickables.Remove(pickable);
         Destroy(pickable.gameObject);
-        Debug.Log("Pickable List: " + _pickables.Count);
         if (_pickables.Count <= 0)
         {
             Debug.Log("Win");

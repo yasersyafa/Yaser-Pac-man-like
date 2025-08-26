@@ -1,5 +1,8 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement Settings")]
@@ -11,11 +14,17 @@ public class PlayerController : MonoBehaviour
     private float _rotationSpeed = 10f; // degrees per second
     [SerializeField]
     private Transform _cameraTransform;
+    [SerializeField]
+    private float _powerUpDuration = 5f;
 
     private Rigidbody _rigidbody;
+    private Coroutine _powerUpCoroutine;
     private InputSystem_Actions _inputActions;
     private Vector2 _moveInput;
     private bool _jumpPressed;
+
+    public Action OnPowerUpStart;
+    public Action OnPowerUpStop;
 
     private void Awake()
     {
@@ -106,5 +115,22 @@ public class PlayerController : MonoBehaviour
     {
         // Simple ground check
         return Physics.Raycast(transform.position, Vector3.down, 1.1f);
+    }
+
+    public void PickPowerUp()
+    {
+        if(_powerUpCoroutine != null)
+        {
+            StopCoroutine(_powerUpCoroutine);
+        }
+        _powerUpCoroutine = StartCoroutine(StartPowerUp());
+        Debug.Log("Power-up picked!");
+    }
+
+    private IEnumerator StartPowerUp()
+    {
+        OnPowerUpStart?.Invoke();
+        yield return new WaitForSeconds(_powerUpDuration);
+        OnPowerUpStop?.Invoke();
     }
 }
