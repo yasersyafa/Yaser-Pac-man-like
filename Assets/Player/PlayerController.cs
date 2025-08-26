@@ -50,6 +50,13 @@ public class PlayerController : MonoBehaviour
         _inputActions.Player.Disable();
     }
 
+    private void Update()
+    {
+        // hide cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     private void FixedUpdate()
     {
         Move();
@@ -124,7 +131,6 @@ public class PlayerController : MonoBehaviour
             StopCoroutine(_powerUpCoroutine);
         }
         _powerUpCoroutine = StartCoroutine(StartPowerUp());
-        Debug.Log("Power-up picked!");
     }
 
     private IEnumerator StartPowerUp()

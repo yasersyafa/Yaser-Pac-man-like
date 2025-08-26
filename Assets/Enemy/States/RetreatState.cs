@@ -14,15 +14,15 @@ namespace Assets.Enemy.States
 
         public void ExitState(Enemy owner)
         {
-            if(owner.TargetEnemy() != null)
-            {
-                owner.NavMeshAgent.SetDestination(owner.transform.position - owner.TargetEnemy().position);
-            }
+
         }
 
         public void UpdateState(Enemy owner)
         {
-            
+            if(owner.TargetEnemy() != null)
+            {
+                owner.NavMeshAgent.SetDestination(owner.transform.position - owner.TargetEnemy().position);
+            }
         }
     }
 }

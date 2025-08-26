@@ -1744,6 +1744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 508464b0581eb4188a2e4335ac317fc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerController: {fileID: 1213484926}
 --- !u!4 &513808899
 Transform:
   m_ObjectHideFlags: 0
@@ -4920,6 +4921,7 @@ MonoBehaviour:
   _jumpForce: 5
   _rotationSpeed: 10
   _cameraTransform: {fileID: 1011447822}
+  _powerUpDuration: 5
 --- !u!114 &1213484927
 MonoBehaviour:
   m_ObjectHideFlags: 0
