@@ -6,19 +6,29 @@ using UnityEngine.AI;
 
 namespace Assets.Enemy
 {
+    [RequireComponent(typeof(NavMeshAgent))]
     /// <summary>
     /// Represents an enemy entity in the game.
     /// </summary>
     public class Enemy : MonoBehaviour
     {
+#region States
         private BaseState<Enemy> _currentState;
         public PatrolState PatrolState = new();
         public ChaseState ChaseState = new();
         public RetreatState RetreatState = new();
+#endregion
         [SerializeField]
         private List<Transform> _waypoints = new();
-
+        [SerializeField]
+        private Transform _targetEnemy;
+        [SerializeField]
+        private float _chaseDistance;
+#region Properties
+        public Transform TargetEnemy() => _targetEnemy;
+        public float ChaseDistance => _chaseDistance;
         public List<Transform> Waypoints => _waypoints;
+#endregion
         [HideInInspector]
         public NavMeshAgent NavMeshAgent;
         private void Awake()
@@ -26,6 +36,13 @@ namespace Assets.Enemy
             _currentState = PatrolState;
             _currentState?.EnterState(this);
             NavMeshAgent = GetComponent<NavMeshAgent>();
+        }
+
+        public void SwitchState(BaseState<Enemy> newState)
+        {
+            _currentState?.ExitState(this);
+            _currentState = newState;
+            _currentState?.EnterState(this);
         }
 
         // Update is called once per frame

@@ -22,6 +22,11 @@ namespace Assets.Enemy.States
 
         public void UpdateState(Enemy owner)
         {
+            if(Vector3.Distance(owner.transform.position, owner.TargetEnemy().position) < owner.ChaseDistance)
+            {
+                owner.SwitchState(owner.ChaseState);
+                return;
+            }
             if (!_isMoving)
             {
                 _isMoving = true;
