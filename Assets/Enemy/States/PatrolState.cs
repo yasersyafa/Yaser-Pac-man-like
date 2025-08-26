@@ -1,4 +1,5 @@
 using Assets.Shared;
+using UnityEngine;
 
 namespace Assets.Enemy.States
 {
@@ -7,19 +8,34 @@ namespace Assets.Enemy.States
     /// </summary>
     public class PatrolState : BaseState<Enemy>
     {
+        private bool _isMoving = false;
+        private Vector3 _destination;
         public void EnterState(Enemy owner)
         {
-            throw new System.NotImplementedException();
+            _isMoving = false;
         }
 
         public void ExitState(Enemy owner)
         {
-            throw new System.NotImplementedException();
+            Debug.Log("Exiting Patrol State");
         }
 
         public void UpdateState(Enemy owner)
         {
-            throw new System.NotImplementedException();
+            if (!_isMoving)
+            {
+                _isMoving = true;
+                int index = Random.Range(0, owner.Waypoints.Count);
+                _destination = owner.Waypoints[index].position;
+                owner.NavMeshAgent.destination = _destination;
+            }
+            else
+            {
+                if (Vector3.Distance(_destination, owner.transform.position) <= 0.1f)
+                {
+                    _isMoving = false;
+                }
+            }
         }
     }
 }

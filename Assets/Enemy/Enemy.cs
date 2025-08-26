@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using Assets.Enemy.States;
 using Assets.Shared;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Assets.Enemy
 {
@@ -13,10 +15,17 @@ namespace Assets.Enemy
         public PatrolState PatrolState = new();
         public ChaseState ChaseState = new();
         public RetreatState RetreatState = new();
+        [SerializeField]
+        private List<Transform> _waypoints = new();
+
+        public List<Transform> Waypoints => _waypoints;
+        [HideInInspector]
+        public NavMeshAgent NavMeshAgent;
         private void Awake()
         {
             _currentState = PatrolState;
             _currentState?.EnterState(this);
+            NavMeshAgent = GetComponent<NavMeshAgent>();
         }
 
         // Update is called once per frame
