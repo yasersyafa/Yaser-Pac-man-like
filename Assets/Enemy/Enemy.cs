@@ -7,6 +7,7 @@ using UnityEngine.AI;
 namespace Assets.Enemy
 {
     [RequireComponent(typeof(NavMeshAgent))]
+    [RequireComponent(typeof(Animator))]
     /// <summary>
     /// Represents an enemy entity in the game.
     /// </summary>
@@ -28,14 +29,17 @@ namespace Assets.Enemy
         public Transform TargetEnemy() => _targetEnemy;
         public float ChaseDistance => _chaseDistance;
         public List<Transform> Waypoints => _waypoints;
-#endregion
         [HideInInspector]
         public NavMeshAgent NavMeshAgent;
+        [HideInInspector]
+        public Animator Animator;
+        #endregion
         private void Awake()
         {
+            Animator = GetComponent<Animator>();
+            NavMeshAgent = GetComponent<NavMeshAgent>();
             _currentState = PatrolState;
             _currentState?.EnterState(this);
-            NavMeshAgent = GetComponent<NavMeshAgent>();
         }
 
         private void Start()

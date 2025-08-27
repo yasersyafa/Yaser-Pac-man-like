@@ -11,7 +11,7 @@ namespace Assets.Enemy.States
     {
         public void EnterState(Enemy owner)
         {
-            
+            owner.Animator.SetTrigger("ChaseState");
         }
 
         public void ExitState(Enemy owner)

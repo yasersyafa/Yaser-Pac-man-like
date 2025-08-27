@@ -2454,6 +2454,7 @@ GameObject:
   - component: {fileID: 786516756}
   - component: {fileID: 786516755}
   - component: {fileID: 786516760}
+  - component: {fileID: 786516761}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -2596,6 +2597,29 @@ MonoBehaviour:
   _targetEnemy: {fileID: 1213484924}
   _chaseDistance: 5
   NavMeshAgent: {fileID: 0}
+  Animator: {fileID: 0}
+--- !u!95 &786516761
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786516754}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6937ffb1eb374478b81750bd1942b7bc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 1
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!43 &837954286
 Mesh:
   m_ObjectHideFlags: 0

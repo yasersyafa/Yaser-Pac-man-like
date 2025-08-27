@@ -9,7 +9,7 @@ namespace Assets.Enemy.States
     {
         public void EnterState(Enemy owner)
         {
-            
+            owner.Animator.SetTrigger("RetreatState");
         }
 
         public void ExitState(Enemy owner)

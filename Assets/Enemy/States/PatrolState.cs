@@ -13,6 +13,7 @@ namespace Assets.Enemy.States
         public void EnterState(Enemy owner)
         {
             _isMoving = false;
+            owner.Animator.SetTrigger("PatrolState");
         }
 
         public void ExitState(Enemy owner)
