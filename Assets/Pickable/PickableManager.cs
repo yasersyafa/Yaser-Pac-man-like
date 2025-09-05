@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PickableManager : MonoBehaviour
@@ -6,6 +7,8 @@ public class PickableManager : MonoBehaviour
     private List<Pickable> _pickables = new();
     [SerializeField]
     private PlayerController _playerController;
+    [SerializeField]
+    private ScoreManager _scoreManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,7 +31,7 @@ public class PickableManager : MonoBehaviour
             pickable.OnPicked += OnPickablePicked;
         }
 
-        Debug.Log("Initialized " + _pickables.Count + " pickables.");
+        _scoreManager.SetMaxScore(pickables.Length);
     }
 
     private void OnPickablePicked(Pickable pickable)
@@ -37,10 +40,17 @@ public class PickableManager : MonoBehaviour
         {
             _playerController?.PickPowerUp();
         }
+        // add score
+        if(_scoreManager != null) _scoreManager.AddScore(1);
+        
+        // remove from list
         _pickables.Remove(pickable);
+        // destroying game object
         Destroy(pickable.gameObject);
+
         if (_pickables.Count <= 0)
         {
+            // trigger win
             Debug.Log("Win");
         }
     }
