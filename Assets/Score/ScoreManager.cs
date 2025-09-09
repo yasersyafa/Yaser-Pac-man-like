@@ -11,7 +11,7 @@ public class ScoreManager : MonoBehaviour
     void Start()
     {
         _score = 0;
-        _maxScore = 0;
+        // _maxScore = 0;
         UpdateUI();
     }
 
@@ -23,7 +23,7 @@ public class ScoreManager : MonoBehaviour
 
     public void AddScore(int value)
     {
-        _score += value;
+        _score += 1;
         UpdateUI();
     }
 

@@ -85,15 +85,6 @@ public class PlayerController : MonoBehaviour
         _rigidbody.linearVelocity = velocity;
     }
 
-    private void Jump()
-    {
-        if (_jumpPressed && IsGrounded())
-        {
-            _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
-        }
-        _jumpPressed = false; // reset
-    }
-
     private void Rotate()
     {
         // Rotate only if moving
@@ -124,9 +115,18 @@ public class PlayerController : MonoBehaviour
         return Physics.Raycast(transform.position, Vector3.down, 1.1f);
     }
 
+    private void Jump()
+    {
+        if (_jumpPressed && IsGrounded())
+        {
+            _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+        }
+        _jumpPressed = false; // reset
+    }
+
     public void PickPowerUp()
     {
-        if(_powerUpCoroutine != null)
+        if (_powerUpCoroutine != null)
         {
             StopCoroutine(_powerUpCoroutine);
         }
